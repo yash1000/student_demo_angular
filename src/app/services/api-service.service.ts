@@ -85,9 +85,19 @@ export class ApiServiceService {
   }
 
   // tslint:disable-next-line:typedef
+  getAuthHeader() {
+      this.httpOptions = {
+        headers: new HttpHeaders({
+          Accept: 'application/json',
+        }),
+      };
+      return this.httpOptions;
+  }
+
+  // tslint:disable-next-line:typedef
   exportStudentFile(data) {
     console.log(data);
-    return this.http.get(this.baseurl + 'import-student', data).pipe(
+    return this.http.post(this.baseurl + 'import-student', data, this.getAuthHeader()).pipe(
       catchError((err => {
           this.handleAuthError(err);
           return throwError(err);

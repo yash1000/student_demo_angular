@@ -2,13 +2,13 @@
   <br>
   <div>
     <input class="d-none" type="file" ID="fileSelect" #upload (change)="uploadFile($event)"
-           accept=".csv .xlsx, .xls"/>
+           accept=".csv"/>
     <button (click)="upload.click()" class="btn btn-info float-right mb-4 ml-2">Upload Student Excel File</button>
       <button class="btn btn-info float-right mb-4 ml-2" (click)="addStudent()">Add Student</button>
     <button class="btn btn-info float-right mb-4" (click)="downloadCsv()">Download CSV</button>
   </div>
   <div>
-    <table class="table">
+    <table class="table" *ngIf="data.length>0">
       <thead>
       <tr>
         <th scope="col">First Name</th>
@@ -38,5 +38,10 @@
       </tr>
       </tbody>
     </table>
+    <br>
+    <br>
   </div>
+</div>
+<div class="container text-center" *ngIf="data.length <= 0">
+  <p>No data found</p>
 </div>

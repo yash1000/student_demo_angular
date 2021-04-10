@@ -67,10 +67,12 @@ export class StudentComponent implements OnInit {
     }
     const formdata = new FormData();
     if (e.target.files && e.target.files[0]) {
-      formdata.append('file', e.target.files[0]);
+      formdata.append('file', e.target.files[0], e.target.files[0].name);
       this.api.exportStudentFile(formdata).subscribe((res: any) => {
         if (res.meta.code === 1) {
-          this.toaster.success(res.meta.message);
+          setTimeout(() => {
+            this.getList();
+          }, 1000);
         } else {
           this.toaster.error(res.meta.message);
         }
